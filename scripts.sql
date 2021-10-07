@@ -40,3 +40,5 @@ CREATE TABLE inema.sales_has_products(
     FOREIGN KEY (sale_id) REFERENCES sales(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
 )
+
+
