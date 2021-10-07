@@ -28,6 +28,6 @@ class Sales extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('sales');
     }
 }
