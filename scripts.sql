@@ -42,3 +42,19 @@ CREATE TABLE inema.sales_has_products(
 )
 
 
+-- insert in table client
+INSERT INTO inema.clients(id, name, email, cpf) values
+(UUID(),'ClientA', 'clientea@teste.com', '047.608.047-90'),
+(UUID(), 'ClientB','cliente2@teste.com', '066.282.081-92'),
+(UUID(), 'ClientC', 'client3@teste.com', '690.733.139-02'),
+(UUID(), 'ClientD', 'client4@teste.com', '382.320.268-55')
+
+-- insert in table products
+INSERT INTO inema.products(id, name, price, quantity) values
+(UUID(), 'ProdutoA', 8.00, 2),
+(UUID(), 'ProdutoB', 9.00, 9),
+(UUID(), 'ProdutoC', 10.00,10),
+(UUID(), 'ProdutoD', 2.00, 5),
+(UUID(), 'ProdutoE', 12.00,8),
+(UUID(), 'ProdutoF', 3.00 ,3),
+(UUID(), 'ProdutoG', 5.00 , 7)
