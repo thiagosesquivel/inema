@@ -16,6 +16,8 @@ class Sales extends Migration
         Schema::create('sales', function(Blueprint $table){
             $table->uuid('id')->primary();
             $table->foreignUuid('client_id')->references('id')->on('clients');
+            $table->float('total',8,2);
+            $table->timestamps();
         });
     }
 
