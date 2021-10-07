@@ -13,7 +13,12 @@ class SalesHasProducts extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('sales_has_products', function(Blueprint $table){
+            $table->uuid('id')->primary();
+            $table->foreignUuid('sale_id')->references('id')->on('sales');
+            $table->foreignUuid('product_id')->references('id')->on('products');
+            $table->integer('quantity');
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class SalesHasProducts extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('sales_has_products');
     }
 }
