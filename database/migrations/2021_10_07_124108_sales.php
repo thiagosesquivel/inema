@@ -13,7 +13,10 @@ class Sales extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('sales', function(Blueprint $table){
+            $table->uuid('id')->primary();
+            $table->foreignUuid('client_id')->references('id')->on('clients');
+        });
     }
 
     /**
