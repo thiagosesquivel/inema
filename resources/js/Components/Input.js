@@ -8,7 +8,9 @@ export default function Input({
     autoComplete,
     required,
     isFocused,
-    handleChange,
+    handleChange=undefined,
+    doubleClick=undefined,
+    ...rest
 }) {
     const input = useRef();
 
@@ -21,8 +23,10 @@ export default function Input({
     return (
         <div className="flex flex-col items-start">
             <input
+                {...rest}
                 type={type}
                 name={name}
+                onDoubleClick={doubleClick && doubleClick}
                 value={value}
                 className={
                     `border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ` +
@@ -31,7 +35,7 @@ export default function Input({
                 ref={input}
                 autoComplete={autoComplete}
                 required={required}
-                onChange={(e) => handleChange(e)}
+                onChange={ handleChange && handleChange}
             />
         </div>
     );
