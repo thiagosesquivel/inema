@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SalesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,6 +24,10 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/sales', [SalesController::class, 'index']);
+Route::get('/new/sale', [SalesController::class, 'create']);
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
