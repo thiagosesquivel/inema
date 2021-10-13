@@ -18,4 +18,8 @@ class ProductsRepository{
         return $this->products->all();
     }
 
+    public function findById($id){
+        return $this->products->find($id);
+    }
+
 }

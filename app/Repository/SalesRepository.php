@@ -15,11 +15,23 @@ class SalesRepository{
     }
 
     public function create(array $attributes){
-        $this->sales->insert($attributes);
+        return $this->sales->create($attributes);
     }
 
     public function index(){
-        $this->sales->all();
+        return $this->sales->all();
+    }
+
+    public function findById($id){
+        return $this->sales->find($id);
+    }
+
+    public function salesWithRelationship(array $relationship){
+        return $this->sales->with($relationship)->get();
+    }
+
+    public function delete($id){
+        return $this->sales->destroy($id);
     }
 
 }
