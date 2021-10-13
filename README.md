@@ -39,12 +39,11 @@ Chegou a hora de baixar as dependências do ReactJs. Para isso execute o seguint
 
 Vamos configurar o projeto para acessar a nossa database, para isso, iremos criar um arquivo chamado .env na raiz do nosso projeto, copiar todo o conteúdo do arquivo .env-example para ele e alterar as seguntes linhas 
 
-`
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=NOME_DA_SUA_DATABASE
-DB_USERNAME=SEU_USUARIO
+`DB_CONNECTION=mysql</br>
+DB_HOST=127.0.0.1</br>
+DB_PORT=3306</br>
+DB_DATABASE=NOME_DA_SUA_DATABASE</br>
+DB_USERNAME=SEU_USUARIO</br>
 DB_PASSWORD=SUA_SENHA
 `
 
