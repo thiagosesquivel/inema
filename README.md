@@ -129,3 +129,15 @@ INSERT INTO inema.products(name, price, quantity) values
 ( 'ProdutoF', 3.00 ,3),
 ( 'ProdutoG', 5.00 , 7)
 ```
+
+Depois de criada as tabelas e popula-lás, vamos buildar o front-end com o comando:
+```
+yarn prod
+```
+
+E por fim, rodar a aplicação propriamente dita com o comando:
+
+```
+php artisan serve
+```
+
