@@ -54,7 +54,7 @@ DB_USERNAME=SEU_USUARIO
 DB_PASSWORD=SUA_SENHA
 ```
 
-Agora vamos criar nossas tabelas, inserir alguns dados com SQL e adicionar um trigger. Todos esses scripts estão salvos no arquivo scripts.sql
+Agora vamos criar nossas tabelas, inserir alguns dados com SQL e adicionar um trigger ao ser adicionado um novo produto. Todos esses scripts estão salvos no arquivo scripts.sql
 
 ```
 -- Create database Inema
