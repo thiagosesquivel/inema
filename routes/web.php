@@ -25,8 +25,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/sales', [SalesController::class, 'index']);
-Route::get('/new/sale', [SalesController::class, 'create']);
+Route::get('/sales', [SalesController::class, 'index'])->name('list');
+Route::get('/details/{id}',[SalesController::class,'show']);
+Route::get('/new/sale', [SalesController::class, 'create'])->name('createSale');
+Route::post('/new/sale',[SalesController::class, 'store']);
 
 
 Route::get('/dashboard', function () {
