@@ -35,7 +35,13 @@ Após acessar a pasta, é hora de baixar as dependências do Laravel. Para isso 
 
 Chegou a hora de baixar as dependências do ReactJs. Para isso execute o seguinte comando:
 
-` yarn ` ou `npm install`
+```
+ yarn 
+ ``` 
+ ou 
+ ```
+ npm install
+ ```
 
 Vamos configurar o projeto para acessar a nossa database, para isso, iremos criar um arquivo chamado .env na raiz do nosso projeto, copiar todo o conteúdo do arquivo .env-example para ele e alterar as seguntes linhas 
 
