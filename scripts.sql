@@ -23,6 +23,7 @@ CREATE TABLE inema.products(
 CREATE TABLE inema.sales(
 	 id int(6) AUTO_INCREMENT NOT NULL,
 	 client_id int(6) NOT NULL,
+     total float(8,2) NOT NULL,
      created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   	 updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE now(),
   	PRIMARY KEY (id),
@@ -39,6 +40,17 @@ CREATE TABLE inema.sales_has_products(
     FOREIGN KEY (sale_id) REFERENCES sales(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
 )
+
+-- Trigger
+CREATE TRIGGER Tgr_ItensVenda_Insert AFTER INSERT
+ON sales_has_products
+FOR EACH ROW
+BEGIN
+	UPDATE products SET quantity = quantity - NEW.quantity
+WHERE id = NEW.product_id;
+END$
+
+
 
 
 -- insert in table client
