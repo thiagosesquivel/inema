@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '@/Components/Button'
 import PageHeader from '@/Components/PageHeader'
 import Select from '@/Components/Select'
@@ -7,6 +7,10 @@ import { Link, useForm } from '@inertiajs/inertia-react'
 import Modal from '@/Components/Modal'
 import Input from '@/Components/Input'
 import ProductList from '@/Components/ProductList'
+import formatter from '@/Utils/currency'
+import { toast, ToastContainer } from 'react-toastify'
+
+
 
 
 export default function Create({clients, products}) {
@@ -15,7 +19,12 @@ export default function Create({clients, products}) {
     const { data, setData, post } = useForm({
         client:null,
         products:[],
+        total:0
     });
+    useEffect(() => {
+
+    }, [])
+
 
     function handleClick(){
         setIsOpened(!isOpened);
@@ -27,45 +36,54 @@ export default function Create({clients, products}) {
         setData(`${name}`, value);
     }
 
+    function calculateTotal(products){
+        return products.reduce((accumulator, current)=>
+            accumulator += current.total
+        ,0);
+    }
+
     function handleSubmit(e){
         e.preventDefault();
         const alvo = e.target;
         const element = alvo.querySelector('#produto');
         const id =  element.value
         const quantity = alvo.querySelector('#quantity').value
+        const selectedOption = element.querySelector(`option[value="${id}"]`);
         const product = products.find(product=> product.id==id);
+        const name = selectedOption.text;
+        const price = selectedOption.dataset.price
         if(product.quantity>= quantity){
             const produto = {
                 id,
-                name: element.querySelector(`option[value="${id}"]`).text,
-                quantity
+                name,
+                price,
+                quantity,
+                total:price* quantity
             }
-            setData("products",[...data.products, produto]);
-            setIsOpened(!isOpened);
+            const newArray = [...data.products, produto];
+            const total = calculateTotal(newArray);
+            setData({...data,"products":newArray,"total": total});
+            setIsOpened(!isOpened)
         }else{
             setError('Quantidade selecionada maior do que a disponível');
         }
     }
 
+
+
     function removeProduct(e){
         const targetProduct =  e.target.dataset.product;
         let productIndex = data.products.findIndex(product=> product.id==targetProduct);
-        if(productIndex===0){
-            const index = 1;
-            const newArray = data.products.splice(index, 1);
-            setData('products',[...newArray]);
-
-        }else{
-            const newArray = data.products.splice(productIndex, 1);
-            setData('products',[...newArray]);
-        }
+        const newArray = data.products.splice(productIndex+1, 1);
+        const total = calculateTotal(newArray);
+        setData({ ...data, 'products':[...newArray], 'total': total})
     }
 
 
     function handleSubmitSalesForm(e){
         e.preventDefault();
-        if(!data.client || data.products.length===0){
-            alert('Todos os campos precisam ser preenchidos');
+        if(!data.client || data.products.length==0){
+            toast.error('Todos os campos precisam ser preenchidos')
         }
         else
         {
@@ -77,7 +95,6 @@ export default function Create({clients, products}) {
         <Guest>
             <PageHeader title="Nova venda">
                 <div className="flex items-center">
-
                     <Link className="bg-red-500 hover:bg-opacity-80 text-white font-bold rounded-lg p-1 pl-3 pr-3" href="/sales">Cancelar</Link>
                 </div>
             </PageHeader>
@@ -88,7 +105,7 @@ export default function Create({clients, products}) {
                     </div>
                     <div className="flex flex-col mt-4 w-2/5">
                         <h3 className="text-xl">Selecione o cliente</h3>
-                        <Select options={clients} change={handleChange} />
+                        <Select options={clients} name="client" change={(e)=>handleChange(e)} />
                     </div>
                 </div>
                 <div className="bg-gray-100 rounded-lg mb-4 p-2">
@@ -100,14 +117,19 @@ export default function Create({clients, products}) {
                         <ProductList remove={removeProduct} products={data.products}/>
                     </div>
                 </div>
-                <Button className="bg-green-500 font-bold rounded-lg p-1 pl-3 pr-3">Cadastrar</Button>
+                <div className="flex justify-between pl-6 pr-6">
+                    <Button className="bg-green-500 font-bold rounded-lg p-1 pl-3 pr-3">Cadastrar</Button>
+                    <p className="text-xl"><b>Total:</b>  {formatter.format(data.total)}</p>
+                </div>
             </form>
                 {isOpened &&
                     <Modal closeModal={handleClick} title="Adicionar produto a compra">
                         <form onSubmit={handleSubmit}>
                             <div className="flex flex-col mt-2 w-3/5">
                                 <label className="font-bold text-lg">Produto</label>
-                                <Select id="produto" change={handleChange}  options={products} />
+                                <select id="produto"  className="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                    {products.map((product)=><option data-price={product.price && product.price} key={product.id} value={product.id}>{product.name}</option>)}
+                                </select>
                             </div>
                             <div className="flex flex-col mt-2 w-4/5">
                                 <label className="font-bold text-lg">Quantidade</label>
@@ -117,6 +139,8 @@ export default function Create({clients, products}) {
                             <Button className="bg-blue-500 mt-4">Adicionar</Button>
                         </form>
                     </Modal>}
+            <ToastContainer/>
+
         </Guest>
     )
 }

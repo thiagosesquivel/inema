@@ -3,43 +3,41 @@ import Sale from './Sale'
 
 export default function SalesList({sales}) {
     return (
-        <div>
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th
+            <div className="min-w-full divide-y divide-gray-200">
+              <div className="bg-gray-50">
+                <div className="flex items-center">
+                  <div
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 flex text-left text-xs font-medium text-gray-500 uppercase divacking-wider w-1/4"
                   >
-                    Name
-                  </th>
-                  <th
+                    Nome do cliente
+                  </div>
+                  <div
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase divacking-wider w-1/4"
                   >
-                    Title
-                  </th>
-                  <th
+                    Data da compra
+                  </div>
+                  <div
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase divacking-wider w-1/4"
                   >
-                    Status
-                  </th>
-                  <th
+                    Valor
+                  </div>
+                  <div
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4"
                   >
-                    Role
-                  </th>
-                  <th scope="col" className="relative px-6 py-3">
-                    <span className="sr-only">Edit</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                    {sales.map(sale=><Sale sale={sale}/>)}
-              </tbody>
-            </table>
-        </div>
+                    Ação
+                  </div>
+
+                </div>
+              </div>
+              <div className="overflow-auto w-full max-h-96">
+                <div className="bg-white divide-y divide-gray-200">
+                        {sales.map(sale=><Sale key={sale.id} sale={sale}/>)}
+                </div>
+              </div>
+            </div>
     )
 }
