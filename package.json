@@ -27,6 +27,7 @@
         "tailwindcss": "^2.1.2"
     },
     "dependencies": {
-        "react-icons": "^4.3.1"
+        "react-icons": "^4.3.1",
+        "react-toastify": "^8.0.3"
     }
 }
